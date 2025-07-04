@@ -13,6 +13,7 @@ IMAGE_REGISTRY ?= quay.io
 IMAGE_REPOSITORY ?= app-sre
 IMG ?= $(IMAGE_REGISTRY)/$(IMAGE_REPOSITORY)/${BASE_IMG}
 
+include boilerplate/generated-includes.mk
 include test/e2e/project.mk
 
 BINARY_FILE ?= build/_output/ocm-agent
@@ -129,4 +130,8 @@ mockgen: ensure-mockgen
 
 ensure-mockgen:
 	go install github.com/golang/mock/mockgen@v1.6.0
+
+.PHONY: boilerplate-update
+boilerplate-update:
+	@boilerplate/update
 
